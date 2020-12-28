@@ -3,7 +3,7 @@ name: publish
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   publish:
@@ -14,9 +14,11 @@ jobs:
 
       - uses: sol/test-repo@main
         id: create-tag
+        with:
+          dry-run: true
 
       - uses: sol/hackage-publish@dev
         with:
           hackageToken: ${{ secrets.HACKAGE_AUTH_TOKEN }}
-          publish: true
+          publish: false
         if: steps.create-tag.outputs.created
