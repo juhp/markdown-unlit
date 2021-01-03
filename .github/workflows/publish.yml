@@ -3,7 +3,7 @@ name: publish
 on:
   push:
     branches:
-      - main
+      - autotag
 
 jobs:
   publish:
@@ -15,10 +15,11 @@ jobs:
         id: autotag
         with:
           prefix: null
+          dry-run: true
 
       - run: cabal sdist
       - uses: sol/hackage-publish@dev
         with:
           hackageToken: ${{ secrets.HACKAGE_AUTH_TOKEN }}
-          publish: true
+          publish: false
         if: steps.autotag.outputs.created
