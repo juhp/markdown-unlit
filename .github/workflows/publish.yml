@@ -18,7 +18,7 @@ jobs:
           dry-run: true
 
       - run: cabal sdist
-      - uses: sol/hackage-publish@dev
+      - uses: sol/hackage-publish@test
         with:
           hackageToken: ${{ secrets.HACKAGE_AUTH_TOKEN }}
           publish: false
